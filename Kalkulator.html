@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Kalori untuk Diet Sehat</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- slider stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .hero_area {
+        height: 100%;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("https://www.rsabhk.co.id/images/healthy-lunch-go-packed-lunch-box.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .header_section {
+        background-color: black; /* Ganti warna latar belakang header menjadi hitam */
+        z-index: 1000;
+        position: fixed;
+        width: 100%;
+        top: 0;
+      }
+
+      .custom_nav-container {
+        padding: 20px;
+      }
+
+      #calculator {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+        margin: auto;
+        margin-top: 120px;
+        position: relative;
+      }
+
+      @media (max-width: 767px) {
+        #calculator {
+          margin-top: 80px;
+        }
+      }
+
+      h1 {
+        color: #ffffff;
+        margin-bottom: 20px;
+      }
+
+      h1 span {
+        color: #4caf50; /* Warna hijau untuk teks di dalam elemen span */
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+        color: #ffffff;
+      }
+
+      select,
+      input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #000000;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      button.reset {
+        background-color: red; /* Warna merah untuk tombol reset */
+      }
+
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+
+      #remaining-calories {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <span> KALORIKU </span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div
+              class="d-flex ml-auto flex-column flex-lg-row align-items-center"
+            >
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html"
+                    >Home <span class="sr-only">(current)</span></a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Kalkulator.html">
+                    Kalkulator Kalori
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="coba.html"> Video Olahraga </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="menu.html"> Kalori Dibutuhkan</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div id="calculator">
+      <h1><span>Kal</span>oriku</h1>
+
+      <label for="category">Pilih Kategori:</label>
+      <select id="category" onchange="populateFoods()">
+        <option value="karbohidrat">Karbohidrat</option>
+        <option value="protein">Protein</option>
+        <option value="lemak">Lemak</option>
+      </select>
+
+      <label for="food">Pilih Makanan:</label>
+      <select id="food"></select>
+
+      <label for="quantity">Jumlah:</label>
+      <input type="number" id="quantity" placeholder="Jumlah gram" />
+
+      <label for="target-calories">Jumlah Kalori Harian yang Dibutuhkan:</label>
+      <input type="number" id="target-calories" placeholder="Jumlah kalori" />
+
+      <button onclick="hitungKalori()">Hitung Kalori</button>
+      <button class="reset" onclick="resetForm()">Reset</button>
+
+      <p id="result">Total Kalori: 0 Kal</p>
+      <p id="remaining-calories">Sisa Kalori: 0 Kal</p>
+    </div>
+
+    <script>
+      var kaloriPerGram = {
+        karbohidrat: {
+          Nasi: 1.29,
+          Roti: 2.65,
+          Kentang: 0.87,
+          UbiJalar: 0.76,
+          Singkong: 1.6,
+          Jagung: 0.86,
+          Gandum: 2.59,
+          Oat: 3.89,
+        },
+        protein: {
+          Ayam: 2.37,
+          Ikan: 0.84,
+          Telur: 1.47,
+          Sapi: 2.88,
+          Tuna: 1.08,
+        },
+        lemak: {
+          MinyakZaitun: 8.84,
+          Alpukat: 1.6,
+          kacangAlmond: 5.78,
+          Keju: 4.03,
+          Yoghurt: 0.85,
+        },
+      };
+
+      var totalKalori = 0; // Variabel global untuk menyimpan total kalori
+
+      function populateFoods() {
+        var category = document.getElementById("category").value;
+        var foodDropdown = document.getElementById("food");
+
+        foodDropdown.innerHTML = "";
+
+        for (var food in kaloriPerGram[category]) {
+          var option = document.createElement("option");
+          option.value = food;
+          option.text = food;
+          foodDropdown.add(option);
+        }
+      }
+
+      function hitungKalori() {
+        var category = document.getElementById("category").value;
+        var food = document.getElementById("food").value;
+        var quantity = parseFloat(document.getElementById("quantity").value);
+
+        if (isNaN(quantity) || quantity <= 0) {
+          alert("Jumlah harus angka positif!");
+          return;
+        }
+
+        var kaloriPerGramValue = kaloriPerGram[category][food];
+        var totalKaloriPerFood = kaloriPerGramValue * quantity;
+
+        totalKalori += totalKaloriPerFood; // Menambahkan total kalori dari makanan baru
+
+        // Menampilkan total kalori dan sisa kalori
+        document.getElementById("result").innerHTML =
+          "Total Kalori: " + totalKalori.toFixed(0) + " Kal";
+
+        // Mengambil jumlah kalori harian yang diinput pengguna
+        var targetCalories = parseFloat(
+          document.getElementById("target-calories").value
+        );
+
+        // Memastikan jumlah kalori harian valid dan positif
+        if (isNaN(targetCalories) || targetCalories <= 0) {
+          alert("Jumlah kalori harian harus angka positif!");
+          return;
+        }
+
+        // Menghitung dan menampilkan sisa kalori
+        var sisaKalori = targetCalories - totalKalori;
+        document.getElementById("remaining-calories").innerHTML =
+          "Sisa Kalori: " + sisaKalori.toFixed(0) + " Kal";
+      }
+
+      function resetForm() {
+        totalKalori = 0; // Mengatur ulang total kalori
+        document.getElementById("category").selectedIndex = 0;
+        document.getElementById("food").innerHTML = "";
+        document.getElementById("quantity").value = "";
+        document.getElementById("target-calories").value = "";
+        document.getElementById("result").innerHTML = "Total Kalori: 0 Kal";
+        document.getElementById("remaining-calories").innerHTML =
+          "Sisa Kalori: 0 Kal";
+        populateFoods();
+      }
+
+      populateFoods();
+    </script>
+  </body>
+</html>
