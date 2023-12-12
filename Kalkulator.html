@@ -9,24 +9,17 @@
       type="text/css"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-    <!-- slider stylesheet -->
     <link
       rel="stylesheet"
       type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
     />
-
-    <!-- fonts style -->
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
       rel="stylesheet"
     />
-    <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
-
-    <!-- Custom styles for this template -->
     <style>
       html,
       body {
@@ -49,7 +42,7 @@
       }
 
       .header_section {
-        background-color: black; /* Ganti warna latar belakang header menjadi hitam */
+        background-color: black;
         z-index: 1000;
         position: fixed;
         width: 100%;
@@ -84,7 +77,7 @@
       }
 
       h1 span {
-        color: #4caf50; /* Warna hijau untuk teks di dalam elemen span */
+        color: #4caf50;
       }
 
       label {
@@ -115,7 +108,7 @@
       }
 
       button.reset {
-        background-color: red; /* Warna merah untuk tombol reset */
+        background-color: red;
       }
 
       #result {
@@ -161,15 +154,15 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="Kalkulator.html">
-                    Kalkulator Kalori
-                  </a>
+                  <a class="nav-link" href="Kalkulator.html"
+                    >Kalkulator Kalori</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="coba.html"> Video Olahraga </a>
+                  <a class="nav-link" href="coba.html">Video Olahraga</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="menu.html"> Kalori Dibutuhkan</a>
+                  <a class="nav-link" href="menu.html">Kalori Dibutuhkan</a>
                 </li>
               </ul>
             </div>
@@ -204,6 +197,9 @@
       <p id="remaining-calories">Sisa Kalori: 0 Kal</p>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
       var kaloriPerGram = {
         karbohidrat: {
@@ -232,7 +228,7 @@
         },
       };
 
-      var totalKalori = 0; // Variabel global untuk menyimpan total kalori
+      var totalKalori = 0;
 
       function populateFoods() {
         var category = document.getElementById("category").value;
@@ -261,31 +257,27 @@
         var kaloriPerGramValue = kaloriPerGram[category][food];
         var totalKaloriPerFood = kaloriPerGramValue * quantity;
 
-        totalKalori += totalKaloriPerFood; // Menambahkan total kalori dari makanan baru
+        totalKalori += totalKaloriPerFood;
 
-        // Menampilkan total kalori dan sisa kalori
         document.getElementById("result").innerHTML =
           "Total Kalori: " + totalKalori.toFixed(0) + " Kal";
 
-        // Mengambil jumlah kalori harian yang diinput pengguna
         var targetCalories = parseFloat(
           document.getElementById("target-calories").value
         );
 
-        // Memastikan jumlah kalori harian valid dan positif
         if (isNaN(targetCalories) || targetCalories <= 0) {
           alert("Jumlah kalori harian harus angka positif!");
           return;
         }
 
-        // Menghitung dan menampilkan sisa kalori
         var sisaKalori = targetCalories - totalKalori;
         document.getElementById("remaining-calories").innerHTML =
           "Sisa Kalori: " + sisaKalori.toFixed(0) + " Kal";
       }
 
       function resetForm() {
-        totalKalori = 0; // Mengatur ulang total kalori
+        totalKalori = 0;
         document.getElementById("category").selectedIndex = 0;
         document.getElementById("food").innerHTML = "";
         document.getElementById("quantity").value = "";
@@ -295,6 +287,18 @@
           "Sisa Kalori: 0 Kal";
         populateFoods();
       }
+
+      document
+        .getElementById("navbar-toggler")
+        .addEventListener("click", toggleNavbar);
+
+      var navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          var navbar = document.getElementById("navbarSupportedContent");
+          navbar.classList.remove("show");
+        });
+      });
 
       populateFoods();
     </script>
